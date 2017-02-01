@@ -16,6 +16,8 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
      *  Views
      *********************************************************************************************/
     
+    @IBOutlet weak var flipCameraButton: UIButton!
+    
     var recordingButton: RecordButton!
     
     /*********************************************************************************************
@@ -23,8 +25,6 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
      *********************************************************************************************/
     
     // AVFoundation
-    var player: AVPlayer?
-    var playerLayer: AVPlayerLayer?
     var cameraSession: AVCaptureSession?
     
     // Recording button variables
@@ -110,8 +110,55 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
 
     
     /*********************************************************************************************
+     *  IBAction Functions
+     *********************************************************************************************/
+    
+    @IBAction func flipCameraPressed(_ sender: UIButton) {
+        
+        // Flip our camera
+        if let session = cameraSession {
+            
+            // Let the session know we are about to start making changes
+            session.beginConfiguration()
+            
+            // Remove existing input
+            let currentCameraInput: AVCaptureInput = session.inputs.first as! AVCaptureInput
+            session.removeInput(currentCameraInput)
+            
+            // Declare our new camera variable
+            var newCamera: AVCaptureDevice! = nil
+            
+            // Get the new input, so back or front camera
+            if let input = currentCameraInput as? AVCaptureDeviceInput {
+                newCamera = input.device.position == .front ? cameraWithPosition(position: .back) : cameraWithPosition(position: .front)
+            }
+            
+            // Create a new input to this session
+            var err: NSError?
+            var newVideoInput: AVCaptureDeviceInput!
+            do {
+                newVideoInput = try AVCaptureDeviceInput(device: newCamera)
+            } catch let err1 as NSError {
+                err = err1
+                newVideoInput = nil
+            }
+            
+            // Add the input here to the session or show an error
+            if (newVideoInput == nil || err != nil) {
+                print("Error creating capture device input: \(err!.localizedDescription)")
+            } else {
+                session.addInput(newVideoInput)
+            }
+            
+            // Commit all of our configuration changes
+            session.commitConfiguration()
+        }
+    }
+    
+    /*********************************************************************************************
      *  Target Functions
      *********************************************************************************************/
+
 
     @objc func record() {
         self.progressTimer = Timer.scheduledTimer(timeInterval: 0.05, target: self, selector: #selector(updateProgress), userInfo: nil, repeats: true)
@@ -131,6 +178,31 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             self.recordingButton.setProgress(progress)
             self.progressTimer.invalidate()
         }
+    }
+    
+    /*********************************************************************************************
+     *  Accessory Functions
+     *********************************************************************************************/
+    
+    fileprivate func bringSubviewsToFront() {
+        
+        // After starting our camera layer we need to bring the subviews to the front
+        self.view.bringSubview(toFront: self.recordingButton)
+        self.view.bringSubview(toFront: self.flipCameraButton)
+    }
+    
+    fileprivate func cameraWithPosition(position: AVCaptureDevicePosition) -> AVCaptureDevice? {
+        
+        // Get our list of devices
+        let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo)!
+        for device in devices {
+            let device = device as! AVCaptureDevice
+            if device.position == position {
+                return device
+            }
+        }
+        
+        return nil
     }
 
 }
@@ -177,14 +249,11 @@ extension SelfieViewController {
         preview?.position = CGPoint(x: self.view.bounds.midX, y: self.view.bounds.midY)
         preview?.videoGravity = AVLayerVideoGravityResize
         
-        // Remove player video
-        self.playerLayer?.removeFromSuperlayer()
-        
         // Go ahead and add the camera preview layer to the next index
         self.view.layer.addSublayer(preview!)
         
         // Bring our recording button to the front
-        self.view.bringSubview(toFront: recordingButton)
+        bringSubviewsToFront()
         
         // Start the camera session
         self.cameraSession?.startRunning()
