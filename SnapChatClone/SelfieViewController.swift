@@ -155,7 +155,7 @@ extension SelfieViewController {
         self.view.addSubview(self.recordingButton)
         
         // Activate layout constraints
-        let bottomConstraint = NSLayoutConstraint(item: recordingButton, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 100)
+        let bottomConstraint = NSLayoutConstraint(item: recordingButton, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: -50)
         let centerHorizontalConstraint = NSLayoutConstraint(item: recordingButton, attribute: .centerX, relatedBy: .equal, toItem: self.view, attribute: .centerX, multiplier: 1.0, constant: 0)
         let heightConstraint = NSLayoutConstraint(item: recordingButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 70)
         let widthConstraint = NSLayoutConstraint(item: recordingButton, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1.0, constant: 70)
