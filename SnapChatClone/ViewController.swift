@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        // Show our selfie view controller because it is the main screen
+        showSelfieViewController()
     }
 
 }
@@ -28,7 +29,7 @@ extension ViewController {
         
         // Get access to the selfie storyboard 
         let selfieViewController = UIStoryboard(name: "Selfie", bundle: nil).instantiateViewController(withIdentifier: "selfieViewController") as! SelfieViewController
-        
+        addAndShowChildViewController(selfieViewController, container: self.view, animation: nil)
     }
     
 }

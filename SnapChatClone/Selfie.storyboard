@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Selfie View Controller-->
         <scene sceneID="oeK-Jd-Pce">
             <objects>
-                <viewController storyboardIdentifier="selfieViewController" id="YSF-gj-y6L" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="selfieViewController" id="YSF-gj-y6L" customClass="SelfieViewController" customModule="SnapChatClone" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KbS-bW-usi"/>
                         <viewControllerLayoutGuide type="bottom" id="eNM-U1-ubl"/>

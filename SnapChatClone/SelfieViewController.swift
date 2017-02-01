@@ -10,13 +10,13 @@ import UIKit
 import AVFoundation
 import RecordButton
 
-class SelfieViewController: UIViewController {
+class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     /*********************************************************************************************
      *  Views
      *********************************************************************************************/
     
-    weak var recordingButton: RecordButton!
+    var recordingButton: RecordButton!
     
     /*********************************************************************************************
      *  Properties
@@ -38,12 +38,76 @@ class SelfieViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = UIColor.black
 
         // Prepare views here
         prepareRecordingButton()
         prepareCameraSession()
         prepareCameraPreviewLayer()
+        
+        // Start our camera session
+        startCameraSession()
     }
+    
+    /*********************************************************************************************
+     *  AVCaptureVideoDataOutputSampleBufferDelegate Methods
+     *********************************************************************************************/
+    
+    fileprivate func startCameraSession() {
+        
+        // Get our front facing camera
+        let captureDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) as AVCaptureDevice
+        
+        do {
+            
+            // Set our device input type
+            let deviceInputType = try AVCaptureDeviceInput(device: captureDevice)
+            
+            // Indicates start of a set of configurations to be done atomically -
+            cameraSession?.beginConfiguration()
+            
+            if (cameraSession?.canAddInput(deviceInputType) == true) {
+                cameraSession?.addInput(deviceInputType)
+            }
+            
+            // Go ahead and set video properties by creating a new instantiation of AVCaptureVideoDataOutput
+            let dataOutput = AVCaptureVideoDataOutput()
+            
+            // This pixel format is composed by two 8-bit components. The first byte represents the luma, while the second byte represents two chroma components (blue and red). This format is also shortly called YCC.
+            // Used since processing video frames is computationally expensive so using this format helps
+            dataOutput.videoSettings = [(kCVPixelBufferPixelFormatTypeKey as NSString): NSNumber(value: kCVPixelFormatType_420YpCbCr8BiPlanarFullRange as UInt32)]
+            
+            // Discard vidoe frames to process video faster
+            // If the video frame arrives too late discard it
+            dataOutput.alwaysDiscardsLateVideoFrames = true
+            
+            if (cameraSession?.canAddOutput(dataOutput) == true) {
+                cameraSession?.addOutput(dataOutput)
+            }
+            
+            cameraSession?.commitConfiguration()
+            
+            let queue = DispatchQueue(label: "video_queue")
+            dataOutput.setSampleBufferDelegate(self, queue: queue)
+            
+        } catch let error as NSError {
+            NSLog("\(error)", "\(error.localizedDescription)")
+        }
+    }
+    
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        
+        // Here you collect each frame and process it into a video file if you want, send it up to the server foolio...
+        
+    }
+    
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didDrop sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        
+        // Here you can collect the frames that were dropped foolio...
+        
+    }
+
     
     /*********************************************************************************************
      *  Target Functions
