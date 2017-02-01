@@ -141,7 +141,8 @@ extension SelfieViewController {
         
         // Create a new button and set it's attributes and targets
         self.recordingButton = RecordButton(frame: CGRect(x: 0, y: 0, width: 70, height: 70))
-        self.recordingButton.buttonColor = UIColor.white
+        self.recordingButton.progressColor = UIColor(red:0.96, green:0.89, blue:0.23, alpha:1.00)
+        self.recordingButton.buttonColor = UIColor(red:0.96, green:0.89, blue:0.23, alpha:1.00) // SnapChat Button
         self.recordingButton.closeWhenFinished = false
         
         // Set targets
