@@ -9,17 +9,26 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    /*********************************************************************************************
+     *  LifeCycle Methods
+     *********************************************************************************************/
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 
 }
 
+extension ViewController {
+    
+    fileprivate func showSelfieViewController() {
+        
+        // Get access to the selfie storyboard 
+        let selfieViewController = UIStoryboard(name: "Selfie", bundle: nil).instantiateViewController(withIdentifier: "selfieViewController") as! SelfieViewController
+        
+    }
+    
+}

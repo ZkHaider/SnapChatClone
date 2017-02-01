@@ -1,0 +1,12 @@
+PODS:
+  - RecordButton (1.0.1)
+
+DEPENDENCIES:
+  - RecordButton
+
+SPEC CHECKSUMS:
+  RecordButton: ce25d35d8dec7e7d79aa03b9deaf8888a13353c3
+
+PODFILE CHECKSUM: 66b7b92bc65fb8b241ef16dd32ebfa6bd58b42f2
+
+COCOAPODS: 1.1.1
