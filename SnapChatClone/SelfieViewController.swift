@@ -270,24 +270,10 @@ extension SelfieViewController {
         bringSubviewsToFront()
         
         // Prepare our asset writers to save media
+        // TODO...
         
         // Start the camera session
         self.cameraSession?.startRunning()
-    }
-    
-    fileprivate func prepareAssetWriters() {
-        
-        self.assetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo,outputSettings: outputSettings)
-        
-        var pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput, sourcePixelBufferAttributes:
-            [ kCVPixelBufferPixelFormatTypeKey : Int(kCVPixelFormatType_32BGRA)])
-        
-        
-        var assetWriter = AVAssetWriter(url: URLFromSomwhere, fileType: AVFileTypeMPEG4 , error : Error )
-        assetWriter.addInput(assetWriterInput)
-        assetWriterInput.expectsMediaDataInRealTime = true
-        assetWriter.startWriting()
-        assetWriter.startSession(atSourceTime: kCMTimeZero)
     }
 
 }
