@@ -260,7 +260,7 @@
 				TargetAttributes = {
 					4B33AC591E42975F00C86AE4 = {
 						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = EVL2DEPTTR;
+						DevelopmentTeam = 63XSXDMV4X;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -475,7 +475,7 @@
 			baseConfigurationReference = 2EE588C39F0F6B59DD9EF5CB /* Pods-SnapChatClone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EVL2DEPTTR;
+				DEVELOPMENT_TEAM = 63XSXDMV4X;
 				INFOPLIST_FILE = SnapChatClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zkhaider.SnapChatClone;
@@ -489,7 +489,7 @@
 			baseConfigurationReference = 19B2002E7D053DC9C7FD7BED /* Pods-SnapChatClone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = EVL2DEPTTR;
+				DEVELOPMENT_TEAM = 63XSXDMV4X;
 				INFOPLIST_FILE = SnapChatClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zkhaider.SnapChatClone;
