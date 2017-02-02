@@ -8,7 +8,20 @@
 
 import UIKit
 
+enum Section {
+    case conversations
+    case selfie
+    case stories
+}
+
 class ViewController: UIViewController {
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var topBar: UINavigationBar!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     /*********************************************************************************************
      *  LifeCycle Methods
@@ -19,6 +32,9 @@ class ViewController: UIViewController {
         
         // Show our selfie view controller because it is the main screen
         showSelfieViewController()
+        
+        // Prepare top bar
+        prepareTopBar()
     }
 
 }
@@ -30,6 +46,20 @@ extension ViewController {
         // Get access to the selfie storyboard 
         let selfieViewController = UIStoryboard(name: "Selfie", bundle: nil).instantiateViewController(withIdentifier: "selfieViewController") as! SelfieViewController
         addAndShowChildViewController(selfieViewController, container: self.view, animation: nil)
+        
+        // We want it to be behind the scroll view so bring the scroll view to the front
+        view.insertSubview(selfieViewController.view, belowSubview: scrollView)
+    }
+    
+    fileprivate func prepareTopBar() {
+        
+        // Clear color
+        topBar.setBackgroundImage(nil, for: .default)
+        
+        // Extra height
+        var frame = topBar.frame
+        frame.size.height = 64.0
+        topBar.frame = frame
     }
     
 }
