@@ -58,7 +58,6 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         prepareRecordingButton()
         prepareCameraSession()
         prepareCameraPreviewLayer()
-        prepareAssetWriters()
         
         // Start our camera session
         startCameraSession()
