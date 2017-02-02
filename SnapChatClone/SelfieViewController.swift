@@ -21,11 +21,24 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var recordingButton: RecordButton!
     
     /*********************************************************************************************
+     *  Constants
+     *********************************************************************************************/
+    
+    // Video save settings
+    static let outputSettings = [
+        AVVideoWidthKey: Int(480),
+        AVVideoHeightKey: Int(640),
+        AVVideoCodecKey: AVVideoCodecH264
+        ] as [String : Any]
+    
+    /*********************************************************************************************
      *  Properties
      *********************************************************************************************/
     
     // AVFoundation
     var cameraSession: AVCaptureSession?
+    var assetWriterInput: AVAssetWriterInput?
+    var pixelBufferAdapter: AVAssetWriterInputPixelBufferAdaptor?
     
     // Recording button variables
     var progressTimer: Timer!
@@ -45,6 +58,7 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         prepareRecordingButton()
         prepareCameraSession()
         prepareCameraPreviewLayer()
+        prepareAssetWriters()
         
         // Start our camera session
         startCameraSession()
@@ -255,8 +269,25 @@ extension SelfieViewController {
         // Bring our recording button to the front
         bringSubviewsToFront()
         
+        // Prepare our asset writers to save media
+        
         // Start the camera session
         self.cameraSession?.startRunning()
+    }
+    
+    fileprivate func prepareAssetWriters() {
+        
+        self.assetWriterInput = AVAssetWriterInput(mediaType: AVMediaTypeVideo,outputSettings: outputSettings)
+        
+        var pixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput, sourcePixelBufferAttributes:
+            [ kCVPixelBufferPixelFormatTypeKey : Int(kCVPixelFormatType_32BGRA)])
+        
+        
+        var assetWriter = AVAssetWriter(url: URLFromSomwhere, fileType: AVFileTypeMPEG4 , error : Error )
+        assetWriter.addInput(assetWriterInput)
+        assetWriterInput.expectsMediaDataInRealTime = true
+        assetWriter.startWriting()
+        assetWriter.startSession(atSourceTime: kCMTimeZero)
     }
 
 }
