@@ -16,6 +16,7 @@
 		4B33AC7E1E42991200C86AE4 /* SelfieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B33AC7D1E42991200C86AE4 /* SelfieViewController.swift */; };
 		4B33AC841E429D7300C86AE4 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B33AC831E429D7300C86AE4 /* UIViewController.swift */; };
 		57DFDA39B0B6B8B2397FEAA8 /* Pods_SnapChatClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD35F5514672F7BAE59BACC2 /* Pods_SnapChatClone.framework */; };
+		6A291F171E42B8CD00AE1875 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A291F161E42B8CD00AE1875 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		4B33AC7B1E4298EC00C86AE4 /* Selfie.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Selfie.storyboard; sourceTree = "<group>"; };
 		4B33AC7D1E42991200C86AE4 /* SelfieViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfieViewController.swift; sourceTree = "<group>"; };
 		4B33AC831E429D7300C86AE4 /* UIViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		6A291F161E42B8CD00AE1875 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DD35F5514672F7BAE59BACC2 /* Pods_SnapChatClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnapChatClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -67,6 +69,7 @@
 		4B33AC5C1E42975F00C86AE4 /* SnapChatClone */ = {
 			isa = PBXGroup;
 			children = (
+				6A291F151E42B8BA00AE1875 /* Profile */,
 				4B33AC711E42987F00C86AE4 /* Common */,
 				4B33AC701E42987600C86AE4 /* Convos */,
 				4B33AC6F1E42986E00C86AE4 /* Selfies */,
@@ -206,6 +209,14 @@
 				4B33AC831E429D7300C86AE4 /* UIViewController.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		6A291F151E42B8BA00AE1875 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6A291F161E42B8CD00AE1875 /* ProfileViewController.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		B3BF744B715243E84A45D18E /* Pods */ = {
@@ -352,6 +363,7 @@
 			files = (
 				4B33AC7E1E42991200C86AE4 /* SelfieViewController.swift in Sources */,
 				4B33AC601E42975F00C86AE4 /* ViewController.swift in Sources */,
+				6A291F171E42B8CD00AE1875 /* ProfileViewController.swift in Sources */,
 				4B33AC841E429D7300C86AE4 /* UIViewController.swift in Sources */,
 				4B33AC5E1E42975F00C86AE4 /* AppDelegate.swift in Sources */,
 			);

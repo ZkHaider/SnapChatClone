@@ -17,8 +17,8 @@ extension UIViewController {
     public func addAndShowChildViewController(_ childController: UIViewController, container: UIView?, animation: ((UIView, UIView, @escaping (Bool) -> ()) ->())?) {
         addChildViewController(childController)
         childController.view.frame = view.bounds
-        view.addSubview(childController.view)
         let containerView: UIView = container ?? view
+        containerView.addSubview(childController.view)
         if animation != nil {
             animation?(containerView, childController.view, { (finished: Bool) in
                 childController.didMove(toParentViewController: self)
