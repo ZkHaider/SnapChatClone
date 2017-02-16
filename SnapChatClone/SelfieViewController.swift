@@ -21,11 +21,24 @@ class SelfieViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var recordingButton: RecordButton!
     
     /*********************************************************************************************
+     *  Constants
+     *********************************************************************************************/
+    
+    // Video save settings
+    static let outputSettings = [
+        AVVideoWidthKey: Int(480),
+        AVVideoHeightKey: Int(640),
+        AVVideoCodecKey: AVVideoCodecH264
+        ] as [String : Any]
+    
+    /*********************************************************************************************
      *  Properties
      *********************************************************************************************/
     
     // AVFoundation
     var cameraSession: AVCaptureSession?
+    var assetWriterInput: AVAssetWriterInput?
+    var pixelBufferAdapter: AVAssetWriterInputPixelBufferAdaptor?
     
     // Recording button variables
     var progressTimer: Timer!
@@ -254,6 +267,9 @@ extension SelfieViewController {
         
         // Bring our recording button to the front
         bringSubviewsToFront()
+        
+        // Prepare our asset writers to save media
+        // TODO...
         
         // Start the camera session
         self.cameraSession?.startRunning()
